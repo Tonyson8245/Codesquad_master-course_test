@@ -27,6 +27,16 @@ public class Mission {
 				System.out.println(Arrays.toString(word));
 			}
 		}
+		else if(arr[2].equals("R")||arr[2].equals("r")){
+			for(int i=0;i<number;i++){
+				temp = word[len-1];
+					for(int j=len-1;j>=1;j--){
+						word[j] = word[j-1];
+					}
+				word[0] = temp;
+				System.out.println(Arrays.toString(word));
+			}
+		}
 	}
 }
 
