@@ -7,6 +7,7 @@ public class Mission {
 						    {"G","C","W"},
 						    {"G","B","B"}};
 		preview(cube);
+		System.out.print("\rCUBE> ");
 	}
 	public static void preview(String[][] cube){
 		for (int i = 0; i < cube.length; i++) {
