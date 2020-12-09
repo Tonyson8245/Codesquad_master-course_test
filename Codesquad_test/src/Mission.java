@@ -16,7 +16,7 @@ public class Mission {
 			if(cmd.indexOf("Q")>=0){
 				break;
 			}
-			cube = move_up(cube,cmd);
+			cube = move_down(cube,cmd);
 		}
 	}
 	public static void preview(String[][] cube){
@@ -67,6 +67,20 @@ public class Mission {
 			cube[i][column] = cube[i+1][column];
 		}
 		cube[2][column] = temp;
+		return cube;
+	}
+	public static String[][] move_down(String[][] cube,String line){
+		int row=0,column=0;
+		String temp;
+		
+		if(line.indexOf("L")>=0) column=0;
+		else if (line.indexOf("R")>=0) column=2;
+		
+		temp = cube[2][column];
+		for(int i=2;i>0;i--){
+			cube[i][column] = cube[i-1][column];
+		}
+		cube[0][column] = temp;
 		return cube;
 	}
 }
