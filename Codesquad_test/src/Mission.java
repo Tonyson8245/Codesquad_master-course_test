@@ -17,6 +17,11 @@ public class Mission {
 		len = String.valueOf(arr[0]).length();		
 		number = Integer.parseInt(arr[1]);	
 	
+		if(number < 0){
+			if((arr[2].equals("L")||arr[2].equals("l"))) arr[2] = "R";
+			else arr[2] = "L";
+		}
+		
 		if(arr[2].equals("L")||arr[2].equals("l")){
 			for(int i=0;i<number;i++){
 				temp = word[0];
