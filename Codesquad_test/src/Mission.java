@@ -23,6 +23,8 @@ public class Mission {
 		}
 		
 		move(word,arr,Math.abs(number),len);
+		
+		System.out.println(String.join("",word));
 	}
 	
 	public static String[] move(String[] word, String[] arr, int number,int len)
