@@ -3,11 +3,21 @@ import java.util.Scanner;
 
 public class Mission {
 	public static void main(String[] avgs){
+		String cmd;
 		String [][] cube = {{"R","R","W"},
 						    {"G","C","W"},
 						    {"G","B","B"}};
-		preview(cube);
-		System.out.print("\rCUBE> ");
+		while(true){
+			Scanner sc = new Scanner(System.in);
+			preview(cube);
+			System.out.print("\rCUBE> ");
+			cmd = sc.next();
+			
+			if(cmd.indexOf("Q")>=0){
+				System.out.println("끝");
+				break;
+			}
+		}
 	}
 	public static void preview(String[][] cube){
 		for (int i = 0; i < cube.length; i++) {
