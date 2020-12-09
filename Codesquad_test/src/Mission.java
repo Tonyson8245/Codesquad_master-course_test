@@ -17,13 +17,15 @@ public class Mission {
 		len = String.valueOf(arr[0]).length();		
 		number = Integer.parseInt(arr[1]);	
 	
-		for(int i=0;i<number;i++){
-			temp = word[0];
-			for(int j=0;j<=len-2;j++){
-				word[j] = word[j+1];
+		if(arr[2].equals("L")||arr[2].equals("l")){
+			for(int i=0;i<number;i++){
+				temp = word[0];
+					for(int j=0;j<=len-2;j++){
+						word[j] = word[j+1];
+					}
+				word[len-1] = temp;
+				System.out.println(Arrays.toString(word));
 			}
-			word[len-1] = temp;
-			System.out.println(Arrays.toString(word));
 		}
 	}
 }
