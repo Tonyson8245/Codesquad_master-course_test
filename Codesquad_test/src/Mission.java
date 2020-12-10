@@ -3,22 +3,39 @@ import java.util.Scanner;
 
 public class Mission {
 	public static void main(String[] avgs){
-		String cmd;
+		String total_cmd;
 		String [][] cube = {{"R","R","W"},
 						    {"G","C","W"},
 						    {"G","B","B"}};
+
+		String[] div_cmd, cmd;	
+		int len;
+		
+		preview(cube);
+		
 		while(true){
 			Scanner sc = new Scanner(System.in);
-			preview(cube);
 			System.out.print("\rCUBE> ");
-			cmd = sc.next();
+			total_cmd = sc.next();
 			
-			if(cmd.indexOf("Q")>=0){
-				break;
+			if(total_cmd.equals("Q")) break;	
+			
+			div_cmd = total_cmd.split("");
+			len = div_cmd.length;
+
+			cmd = new String[len];
+						
+			for(int i=len-1;i>=0;i--){
+				if(div_cmd[i].equals("'")){
+					cmd[i-1] = div_cmd[i-1] + div_cmd[i];
+					i--;
+				}
+				else cmd[i] = div_cmd[i];
 			}
-			cube = move_down(cube,cmd);
+			
 		}
-	}
+	}		
+
 	public static void preview(String[][] cube){
 		for (int i = 0; i < cube.length; i++) {
 			for (int j = 0; j < cube[i].length; j++) {
