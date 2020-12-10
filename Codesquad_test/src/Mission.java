@@ -4,6 +4,7 @@ public class Mission {
 		String cube[][] = new String[3][18];
 		
 		cube = init(cube);
+		preview(cube);
 	}
 	public static String[][] init(String[][]cube){
 		String color = "B";
@@ -20,5 +21,27 @@ public class Mission {
 		}
 		return cube;
 	}
-
+	public static void preview(String[][] cube){
+		for(int i=0;i<3;i++){
+			System.out.print("            ");
+			for(int j=0;j<3;j++){
+				System.out.print(cube[i][j] + " ");
+			}	
+			System.out.println();
+		}
+		for(int i=0;i<3;i++)		{
+			for(int j=3;j<15;j++){
+				System.out.print(cube[i][j] + " ");
+				if(j%3==2) System.out.print("  ");
+			}	
+			System.out.println();
+		}
+		for(int i=0;i<3;i++){
+			System.out.print("            ");
+			for(int j=15;j<18;j++){
+				System.out.print(cube[i][j] + " ");
+			}	
+			System.out.println();
+		}
+	}
 }
