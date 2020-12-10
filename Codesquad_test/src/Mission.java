@@ -33,6 +33,28 @@ public class Mission {
 				else cmd[i] = div_cmd[i];
 			}
 			
+			for(int i=0;i<cmd.length;i++)
+			{
+				if(cmd[i]!=null)
+				{
+					if(cmd[i].indexOf("'")>=1){ 
+						switch(cmd[i].charAt(0)){
+							case 'U' : move_right(cube,"U"); System.out.println("나"); break;
+							case 'R' : move_down(cube,"R"); break;
+							case 'L' : move_up(cube,"L"); break;
+							case 'B' : move_left(cube,"B"); break;					
+						}
+					}
+					else{ 
+						switch(cmd[i].charAt(0)){
+						case 'U' : move_left(cube,"U"); break;
+						case 'R' : move_up(cube,"R"); break;
+						case 'L' : move_down(cube,"L"); break;
+						case 'B' : move_right(cube,"B"); break;					
+						}
+					}
+				}
+			}
 		}
 	}		
 
