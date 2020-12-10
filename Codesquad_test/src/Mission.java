@@ -53,6 +53,10 @@ public class Mission {
 						case 'B' : move_right(cube,"B"); break;					
 						}
 					}
+					System.out.println();
+					System.out.println(cmd[i]);
+					preview(cube);
+					System.out.println();
 				}
 			}
 		}
