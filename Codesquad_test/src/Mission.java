@@ -3,7 +3,9 @@ public class Mission {
 	public static void main(String[] args){
 		String cube[][] = new String[3][18];
 		
-		cube = init(cube);
+		cube = test_init(cube);
+		cube = main_turn_ccw(cube,side_num("D"));
+
 		preview(cube);			
 	}
 	public static String[][] init(String[][]cube){
@@ -33,7 +35,7 @@ public class Mission {
 				else if(b>5) color = "O";
 				else if(b>2) color = "W";
 				else color = "B";
-				if((a==0)&&(b==0)) color = "K";
+				if((a==0)&&(b==15)) color = "K";
 				cube[a][b] = color;
 			}
 		}
@@ -61,6 +63,41 @@ public class Mission {
 			}	
 			System.out.println();
 		}
+	}
+	public static String[][] main_turn_cw(String[][] cube,int n){
+		String temp[][] = new String[3][18];
+		int k=2+n;
+		for(int a=0;a<3;a++){
+			for(int b=0;b<18;b++) temp[a][b] = cube[a][b];
+		}
+		
+		for(int i=0;i<3;i++){
+			for(int j=n;j<3+n;j++) cube[j-n][k-i] = temp[i][j];
+		}
+		return cube;
+	}
+	public static String[][] main_turn_ccw(String[][] cube,int n){
+		String temp[][] = new String[3][18];
+		int k=2+n;
+		for(int a=0;a<3;a++){
+			for(int b=0;b<18;b++) temp[a][b] = cube[a][b];
+		}
+		for(int i=0;i<3;i++){
+			for(int j=n;j<3+n;j++) cube[k-j][i+n] = temp[i][j];
+		}
+		return cube;
+	}
+	public static int side_num(String side){
+		int n = 0;
+		switch(side){
+			case "U" :n=0; break;
+			case "L" :n=3; break;
+			case "F" :n=6; break;
+			case "B" :n=9; break;
+			case "R" :n=12; break;
+			case "D" :n=15; break;
+		}
+		return n;
 	}
 }
 
