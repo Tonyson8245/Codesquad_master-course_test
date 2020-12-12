@@ -3,6 +3,10 @@ public class Mission {
 	public static void main(String[] avgs){
 		String cube[][][] = new String[6][3][3];
 		cube = init(cube);
+		cube[1][0][0] = "K";
+		
+		cube = main_turn_ccw(cube,1);
+		
 		view(cube);
 	}
 	public static String[][][] init(String cube[][][]){
@@ -41,5 +45,26 @@ public class Mission {
 			System.out.println();
 		}
 	}
-	
+	public static String[][][] main_turn_cw(String[][][] cube,int n){
+		String temp[][] = new String[3][3];
+		for(int a=0;a<3;a++){
+			for(int b=0;b<3;b++) temp[a][b] = cube[n][a][b];
+		}
+		
+		for(int i=0;i<3;i++){
+			for(int j=0;j<3;j++) cube[n][j][2-i] = temp[i][j];
+		}
+		return cube;
+	}
+	public static String[][][] main_turn_ccw(String[][][] cube,int n){
+		String temp[][] = new String[3][3];
+		for(int a=0;a<3;a++){
+			for(int b=0;b<3;b++) temp[a][b] = cube[n][a][b];
+		}
+		
+		for(int i=0;i<3;i++){
+			for(int j=0;j<3;j++) cube[n][2-j][i] = temp[i][j];
+		}
+		return cube;
+	}
 }
