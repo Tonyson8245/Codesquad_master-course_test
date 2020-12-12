@@ -1,12 +1,25 @@
+import java.util.Arrays;
+import java.util.Scanner;
 
 public class Mission {
 	public static void main(String[] avgs){
 		String cube[][][] = new String[6][3][3];
+		String total_cmd;
+		String cmd[];
 		cube = init(cube);
-		cube[0][2][2] = "K";
+		view(cube); System.out.println();
 		
-		cube = sub_turn_R_ccw(cube);
-		view(cube);
+		while(true)
+		{
+			Scanner sc = new Scanner(System.in);
+			System.out.print("\rCUBE> ");
+			total_cmd = sc.next();
+			
+			if(total_cmd.equals("Q")) break;	
+			cmd = cmd_divider(total_cmd);
+			
+			System.out.println(Arrays.toString(cmd));
+		}
 	}
 	public static String[][][] init(String cube[][][]){
 		for(int a=0;a<6;a++){
@@ -222,5 +235,20 @@ public class Mission {
 		}
 		return cube;
 	}
-
+	public static String[] cmd_divider(String total_cmd){
+		String div_cmd[],cmd[];
+		int len;
+		div_cmd = total_cmd.split("");
+		len = div_cmd.length;
+		cmd = new String[len];		
+		for(int i=len-1;i>=0;i--){
+			if(div_cmd[i].equals("'")){
+				cmd[i-1] = div_cmd[i-1] + div_cmd[i];
+				i--;
+			}
+			else cmd[i] = div_cmd[i];	
+		}
+		return cmd;
+	}
+	
 }
