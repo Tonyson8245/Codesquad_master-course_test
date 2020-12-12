@@ -1,6 +1,7 @@
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Scanner;
+import java.util.Random;
 
 public class Mission {
 	public static void main(String[] avgs){
@@ -21,12 +22,21 @@ public class Mission {
 			total_cmd = sc.next();
 			
 			if(total_cmd.equals("Q")) break;	
-			cmd = cmd_divider(total_cmd);	
-			cube = move(cube,cmd);
+			else if(total_cmd.equals("Mix")){
+				cube= mix(cube);
+				view(cube);
+			}
+			else{
+				cmd = cmd_divider(total_cmd);
+				number = cmd_count(cmd,number);
+				cube = move(cube,cmd);
+			}	
 		}
 		long endTime = System.currentTimeMillis();
 		SimpleDateFormat format1 = new SimpleDateFormat("mm:ss");
-		System.out.print("경과시간: " + format1.format(endTime-startTime));
+		System.out.println("경과시간: " + format1.format(endTime-startTime));
+		System.out.println("조작갯수:" + number);
+		System.out.println("이용해주셔서 감사합니다. 뚜뚜뚜.");
 	}
 	
 	public static String[][][] init(String cube[][][]){
@@ -261,8 +271,6 @@ public class Mission {
 			if(cmd[i-1]==null) cmd[i] = cmd[i-2]; 
 			else cmd[i]=cmd[i-1];
 		}
-		System.out.println(Arrays.toString(cmd));
-				
 		return cmd;
 	}
 	public static String[][][] move(String[][][] cube, String[] cmd){
@@ -294,6 +302,36 @@ public class Mission {
 				System.out.println(cmd[i]);
 				view(cube);
 				System.out.println();
+				
+			}
+		}
+		return cube;
+	}
+	public static String[][][] move_mix(String[][][] cube, String[] cmd){
+		for(int i=0;i<cmd.length;i++)
+		{
+			if(cmd[i]!=null)
+			{
+				if(cmd[i].indexOf("'")>=1){ 
+					switch(cmd[i].charAt(0)){
+						case 'U' : main_turn_ccw(cube,0); sub_turn_U_ccw(cube); break;
+						case 'L' : main_turn_ccw(cube,1); sub_turn_L_ccw(cube); break;
+						case 'F' : main_turn_ccw(cube,2); sub_turn_F_ccw(cube); break;
+						case 'R' : main_turn_ccw(cube,3); sub_turn_R_ccw(cube); break;		
+						case 'B' : main_turn_ccw(cube,4); sub_turn_B_ccw(cube); break;
+						case 'D' : main_turn_ccw(cube,5); sub_turn_D_ccw(cube); break;	
+					}
+				}
+				else{ 
+					switch(cmd[i].charAt(0)){
+						case 'U' : main_turn_cw(cube,0); sub_turn_U_cw(cube); break;
+						case 'L' : main_turn_cw(cube,1); sub_turn_L_cw(cube); break;
+						case 'F' : main_turn_cw(cube,2); sub_turn_F_cw(cube); break;
+						case 'R' : main_turn_cw(cube,3); sub_turn_R_cw(cube); break;		
+						case 'B' : main_turn_cw(cube,4); sub_turn_B_cw(cube); break;
+						case 'D' : main_turn_cw(cube,5); sub_turn_D_cw(cube); break;				
+					}
+				}				
 			}
 		}
 		return cube;
@@ -305,5 +343,28 @@ public class Mission {
 				e.printStackTrace();
 			}
 	}
+	public static int cmd_count(String[] cmd,int number)
+	{
+		for(int i=0;i<cmd.length;i++) if(cmd[i]!=null) number++;
+		return number;		
+	}
+	public static String[][][] mix(String[][][] cube){
+			Random random = new Random();
+			String cmd[] = new String[20];
+			for(int i=0;i<20;i++){
+				switch(random.nextInt(100)%6){
+				case 0: cmd[i]="U"; break;
+				case 1: cmd[i]="L"; break;
+				case 2: cmd[i]="F"; break;
+				case 3: cmd[i]="R"; break;
+				case 4: cmd[i]="B"; break;
+				case 5: cmd[i]="D"; break;	
+				}
+			}		
+			cube = move_mix(cube,cmd);
+			return cube;
+	}
+
 }
+
 
