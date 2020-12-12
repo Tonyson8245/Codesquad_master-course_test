@@ -8,7 +8,8 @@ public class Mission {
 		String cube[][][] = new String[6][3][3];
 		String total_cmd;
 		String cmd[];
-		int number = 0;
+				
+		int number = 0,flag=0;
 		
 		long startTime = System.currentTimeMillis();
 		timeMethod();
@@ -25,11 +26,16 @@ public class Mission {
 			else if(total_cmd.equals("Mix")){
 				cube= mix(cube);
 				view(cube);
+				flag=1;
 			}
 			else{
 				cmd = cmd_divider(total_cmd);
 				number = cmd_count(cmd,number);
 				cube = move(cube,cmd);
+				if(flag==1) if(pass(cube)==54){
+					System.out.println("성공 축하드립니다!! 합격하셨습니다!!"); 
+					break;
+				}
 			}	
 		}
 		long endTime = System.currentTimeMillis();
@@ -364,7 +370,17 @@ public class Mission {
 			cube = move_mix(cube,cmd);
 			return cube;
 	}
-
+	public static int pass(String [][][] cube){
+		int ok = 0;
+		String[][][] temp = new String[6][3][3];
+		temp = init(temp);
+		for(int a=0;a<6;a++)for(int b=0;b<3;b++)
+				for(int c=0;c<3;c++){
+					if(temp[a][b][c]==cube[a][b][c]) ok++;
+					else ok = 0;
+		}
+		return ok;
+	}
 }
 
 
