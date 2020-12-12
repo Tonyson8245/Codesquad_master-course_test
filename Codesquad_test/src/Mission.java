@@ -1,3 +1,4 @@
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Scanner;
 
@@ -6,6 +7,10 @@ public class Mission {
 		String cube[][][] = new String[6][3][3];
 		String total_cmd;
 		String cmd[];
+		int number = 0;
+		
+		long startTime = System.currentTimeMillis();
+		timeMethod();
 		cube = init(cube);
 		view(cube); System.out.println();
 		
@@ -16,10 +21,12 @@ public class Mission {
 			total_cmd = sc.next();
 			
 			if(total_cmd.equals("Q")) break;	
-			cmd = cmd_divider(total_cmd);
-					
+			cmd = cmd_divider(total_cmd);	
 			cube = move(cube,cmd);
 		}
+		long endTime = System.currentTimeMillis();
+		SimpleDateFormat format1 = new SimpleDateFormat("mm:ss");
+		System.out.print("경과시간: " + format1.format(endTime-startTime));
 	}
 	
 	public static String[][][] init(String cube[][][]){
@@ -290,6 +297,13 @@ public class Mission {
 			}
 		}
 		return cube;
+	}
+	public static void timeMethod(){
+			try{
+					Thread.sleep(3000);
+			}catch(InterruptedException e){
+				e.printStackTrace();
+			}
 	}
 }
 
