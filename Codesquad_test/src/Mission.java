@@ -4,7 +4,7 @@ public class Mission {
 		String cube[][] = new String[3][18];
 		
 		cube = test_init(cube);
-		cube = sub_turn_U(cube,"ccw");
+		cube = sub_turn_D(cube,"ccw");
 		preview(cube);			
 	}
 	public static String[][] init(String[][]cube){
@@ -34,7 +34,7 @@ public class Mission {
 				else if(b>5) color = "O";
 				else if(b>2) color = "W";
 				else color = "B";
-				if((a==0)&&(b==3)) color = "K";
+				if((a==2)&&(b==3)) color = "K";
 				cube[a][b] = color;
 			}
 		}
@@ -111,6 +111,23 @@ public class Mission {
 			for(int i=3;i<=14;i++){	
 				if(i>11) cube[0][i-9] = temp[0][i];
 				else cube[0][i+3] = temp[0][i];
+			}
+		}
+		return cube;
+	}
+	public static String[][] sub_turn_D(String[][] cube,String cw){
+		String temp[][] = new String[3][18];
+		for(int a=0;a<3;a++) for(int b=0;b<18;b++) temp[a][b] = cube[a][b]; 
+		if(cw.equals("cw")){
+			for(int i=14;i>=3;i--){	
+				if(i<6) cube[2][i+9] = temp[2][i];
+				else cube[2][i-3] = temp[2][i];
+			}
+		}
+		else{
+			for(int i=3;i<=14;i++){	
+				if(i>11) cube[2][i-9] = temp[2][i];
+				else cube[2][i+3] = temp[2][i];
 			}
 		}
 		return cube;
