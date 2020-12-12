@@ -4,7 +4,8 @@ public class Mission {
 		String cube[][] = new String[3][18];
 		
 		cube = test_init(cube);
-		cube = sub_turn_D(cube,"ccw");
+		cube = sub_turn_L(cube,"cw");
+
 		preview(cube);			
 	}
 	public static String[][] init(String[][]cube){
@@ -34,7 +35,7 @@ public class Mission {
 				else if(b>5) color = "O";
 				else if(b>2) color = "W";
 				else color = "B";
-				if((a==2)&&(b==3)) color = "K";
+				if((a==0)&&(b==0)) color = "K";
 				cube[a][b] = color;
 			}
 		}
@@ -132,5 +133,43 @@ public class Mission {
 		}
 		return cube;
 	}
+	public static String[][] sub_turn_L(String[][] cube,String cw){
+		String temp[][] = new String[3][18];
+		for(int a=0;a<3;a++) for(int b=0;b<18;b++) temp[a][b] = cube[a][b]; 
+		if(cw.equals("cw")){
+			for(int i=0;i<3;i++) for(int j=0;j<18;j++){
+				if(j==0) cube[i][j+6] = temp[i][j];
+				else if(j==6) cube[i][j+9] = temp[i][j];
+				else if(j==14){
+					if(i==0) cube[2][j-14] = temp[i][j];
+					else if(i==2) cube[0][j-14] = temp[i][j];
+					else cube[i][j-14] = temp[i][j];
+				}
+				else if(j==15){ 
+					if(i==0) cube[2][j-1] = temp[i][j];
+					else if(i==2) cube[0][j-1] = temp[i][j];
+					else cube[i][j-1] = temp[i][j];
+				}
+			}
+		}
+		else{
+			for(int i=0;i<3;i++) for(int j=0;j<18;j++){
+				if(j==14){
+					if(i==0) cube[2][j+1] = temp[i][j];
+					else if(i==2) cube[0][j+1] = temp[i][j];
+					else cube[i][j+1] = temp[i][j];
+				}
+				else if(j==15) cube[i][j-9] = temp[i][j];
+				else if(j==6) cube[i][j-6] = temp[i][j];
+				else if(j==0){
+					if(i==0) cube[2][j+14] = temp[i][j];
+					else if(i==2) cube[0][j+14] = temp[i][j];
+					else cube[i][j+14] = temp[i][j];
+				}
+			}
+		}
+		return cube;
+	}
+	
 }
 
