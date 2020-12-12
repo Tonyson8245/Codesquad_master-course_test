@@ -19,6 +19,8 @@ public class Mission {
 			cmd = cmd_divider(total_cmd);
 			
 			System.out.println(Arrays.toString(cmd));
+			
+			cube = move(cube,cmd);
 		}
 	}
 	public static String[][][] init(String cube[][][]){
@@ -250,5 +252,37 @@ public class Mission {
 		}
 		return cmd;
 	}
-	
+	public static String[][][] move(String[][][] cube, String[] cmd){
+		for(int i=0;i<cmd.length;i++)
+		{
+			if(cmd[i]!=null)
+			{
+				if(cmd[i].indexOf("'")>=1){ 
+					switch(cmd[i].charAt(0)){
+						case 'U' : main_turn_ccw(cube,0); sub_turn_U_ccw(cube); break;
+						case 'L' : main_turn_ccw(cube,1); sub_turn_L_ccw(cube); break;
+						case 'F' : main_turn_ccw(cube,2); sub_turn_F_ccw(cube); break;
+						case 'R' : main_turn_ccw(cube,3); sub_turn_R_ccw(cube); break;		
+						case 'B' : main_turn_ccw(cube,4); sub_turn_B_ccw(cube); break;
+						case 'D' : main_turn_ccw(cube,5); sub_turn_D_ccw(cube); break;	
+					}
+				}
+				else{ 
+					switch(cmd[i].charAt(0)){
+						case 'U' : main_turn_cw(cube,0); sub_turn_U_cw(cube); break;
+						case 'L' : main_turn_cw(cube,1); sub_turn_L_cw(cube); break;
+						case 'F' : main_turn_cw(cube,2); sub_turn_F_cw(cube); break;
+						case 'R' : main_turn_cw(cube,3); sub_turn_R_cw(cube); break;		
+						case 'B' : main_turn_cw(cube,4); sub_turn_B_cw(cube); break;
+						case 'D' : main_turn_cw(cube,5); sub_turn_D_cw(cube); break;				
+					}
+				}
+				System.out.println();
+				System.out.println(cmd[i]);
+				view(cube);
+				System.out.println();
+			}
+		}
+		return cube;
+	}
 }
