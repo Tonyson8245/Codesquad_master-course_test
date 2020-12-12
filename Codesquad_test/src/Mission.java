@@ -17,12 +17,11 @@ public class Mission {
 			
 			if(total_cmd.equals("Q")) break;	
 			cmd = cmd_divider(total_cmd);
-			
-			System.out.println(Arrays.toString(cmd));
-			
+					
 			cube = move(cube,cmd);
 		}
 	}
+	
 	public static String[][][] init(String cube[][][]){
 		for(int a=0;a<6;a++){
 			switch(a){
@@ -245,11 +244,18 @@ public class Mission {
 		cmd = new String[len];		
 		for(int i=len-1;i>=0;i--){
 			if(div_cmd[i].equals("'")){
-				cmd[i-1] = div_cmd[i-1] + div_cmd[i];
-				i--;
+				cmd[i-1] = div_cmd[i-1] + div_cmd[i]; i--;
 			}
 			else cmd[i] = div_cmd[i];	
+			
+		} 
+		for(int i=len-1;i>=0;i--)if(div_cmd[i].equals("2"))
+		{ 
+			if(cmd[i-1]==null) cmd[i] = cmd[i-2]; 
+			else cmd[i]=cmd[i-1];
 		}
+		System.out.println(Arrays.toString(cmd));
+				
 		return cmd;
 	}
 	public static String[][][] move(String[][][] cube, String[] cmd){
@@ -286,3 +292,4 @@ public class Mission {
 		return cube;
 	}
 }
+
