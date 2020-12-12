@@ -39,7 +39,7 @@ public class Mission {
 				{
 					if(cmd[i].indexOf("'")>=1){ 
 						switch(cmd[i].charAt(0)){
-							case 'U' : move_right(cube,"U"); System.out.println("나"); break;
+							case 'U' : move_right(cube,"U");  break;
 							case 'R' : move_down(cube,"R"); break;
 							case 'L' : move_up(cube,"L"); break;
 							case 'B' : move_left(cube,"B"); break;					
